@@ -19,12 +19,18 @@ async function submit() {
       },
     })
 
+    if (session.value?.state === 'fail')
+      throw new Error('获取session_token出错')
+
     const { data: access } = await useFetch('/auth/assess_token', {
       method: 'post',
       body: {
         session_token: session.value?.data?.session_token,
       },
     })
+
+    if (access.value?.state === 'fail')
+      throw new Error('获取session_token出错')
 
     const userInfoReq = useFetch('/info/user', {
       params: {
@@ -48,7 +54,7 @@ async function submit() {
     downloadURL.value = URL.createObjectURL(blob)
   }
   catch (error) {
-    alert(`出错了${String(error)}`)
+    alert(`${String(error)}`)
   }
 }
 </script>
@@ -58,8 +64,10 @@ async function submit() {
     <a :href="link?.link" target="_blank">
       <ABtn mb-5>NS登录</ABtn>
     </a>
+    <span block font-bold>点击登录按钮，复制链接地址</span>
+    <img src="~/assets/guide.png" alt="" srcset="">
     <div flex items-center gap-10px>
-      <AInput v-model="redirectCode" class="text-xs" />
+      <AInput v-model="redirectCode" placeholder="粘贴链接地址" class="text-xs" />
       <ABtn class="text-xs" @click="submit">
         提交
       </ABtn>
