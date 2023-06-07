@@ -18,7 +18,7 @@ html, body , #__nuxt{
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: white;
+  background-color: #222;
 }
 
 html.dark {
