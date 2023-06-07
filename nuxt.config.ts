@@ -1,4 +1,4 @@
-import { pwa } from './config/pwa'
+import turboConsole from 'vite-plugin-turbo-console'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
@@ -7,8 +7,9 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    '@vite-pwa/nuxt',
     '@anu-vue/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxt/image',
   ],
 
   experimental: {
@@ -21,7 +22,6 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    'anu-vue/dist/style.css',
   ],
 
   colorMode: {
@@ -57,9 +57,31 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
+  anu: {
+    themes: {
+      light: {
+        colors: {
+          primary: '2, 69%, 49%',
+        },
+      },
+      dark: {
+        colors: {
+          primary: '2, 69%, 49%',
+        },
+      },
+    },
+
+  },
+
+  piniaPersistedstate: {
+    storage: 'localStorage',
+  },
 
   devtools: {
     enabled: true,
+  },
+
+  vite: {
+    plugins: [turboConsole()],
   },
 })
