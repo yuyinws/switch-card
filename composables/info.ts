@@ -35,7 +35,7 @@ export const useInfoStore = defineStore('info', () => {
       $toast.error(String(error))
     }
     finally {
-      loading.value = true
+      loading.value = false
     }
   }
 
