@@ -44,7 +44,7 @@ function formatMin(min: number): string {
 </script>
 
 <template>
-  <ACard p-5>
+  <ACard v-if="userInfo" p-5>
     <div flex="~ wrap" items-center justify-between gap-4>
       <div flex items-center gap-3>
         <AAvatar text-lg src="/avatar.jpeg" />
@@ -63,6 +63,7 @@ function formatMin(min: number): string {
       </div>
     </div>
     <ATabs
+      v-if="playHistories"
       class="a-tabs-bordered"
       :tabs="tabs"
     >
