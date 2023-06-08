@@ -10,8 +10,9 @@ export default defineNuxtConfig({
     '@anu-vue/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxt/image',
+    'dayjs-nuxt',
   ],
-
+  ssr: false,
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
     // but missing on offline, disabling extraction it until fixed
@@ -36,8 +37,6 @@ export default defineNuxtConfig({
     },
     prerender: {
       crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/hi'],
     },
   },
 
@@ -83,5 +82,9 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [turboConsole()],
+  },
+
+  build: {
+    transpile: ['vue-sonner'],
   },
 })

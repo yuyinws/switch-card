@@ -1,10 +1,8 @@
 <script setup lang="ts">
-const { auth } = useAuthStore()
+const { auth, logout } = useAuthStore()
 </script>
 
 <template>
   <Login v-if="!auth.sessionToken" />
-  <div v-else>
-    已登录
-  </div>
+  <UserInfo v-else />
 </template>

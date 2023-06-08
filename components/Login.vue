@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { getQuery } from 'ufo'
+import { storeToRefs } from 'pinia'
 
-const { auth } = useAuthStore()
+const { auth, getSessionToken } = useAuthStore()
+const { isLoading } = storeToRefs(useAuthStore())
 
 const { data: linkData } = await useFetch('/auth/link')
 auth.codeVerifier = linkData.value?.codeVerifier || null
@@ -9,58 +10,6 @@ auth.codeVerifier = linkData.value?.codeVerifier || null
 const visibility = useDocumentVisibility()
 
 const redirectCode = ref<string>('')
-const isLoading = ref(false)
-async function handleSubmit() {
-  try {
-    isLoading.value = true
-    const querys = getQuery(redirectCode.value.replace('#', '?'))
-    const { data: session } = await useFetch('/auth/session_token', {
-      method: 'post',
-      body: {
-        session_token_code: querys.session_token_code,
-        session_token_code_verifier: linkData.value?.codeVerifier,
-      },
-    })
-
-    if (session.value?.state === 'fail')
-      throw new Error('获取session_token出错')
-
-    const { data: access } = await useFetch('/auth/assess_token', {
-      method: 'post',
-      body: {
-        session_token: session.value?.data?.session_token,
-      },
-    })
-
-    if (access.value?.state === 'fail')
-      throw new Error('获取session_token出错')
-
-    const userInfoReq = useFetch('/info/user', {
-      params: {
-        accessToken: access.value?.data?.access_token,
-        accessType: access.value?.data?.token_type,
-      },
-    })
-
-    const playHistoryReq = useFetch('/info/play_history', {
-      params: {
-        accessToken: access.value?.data?.access_token,
-        accessType: access.value?.data?.token_type,
-      },
-    })
-
-    const infoData = await Promise.all([userInfoReq, playHistoryReq])
-
-    auth.accessToken = access.value?.data?.access_token || null
-    auth.sessionToken = session.value?.data?.session_token || null
-  }
-  catch (error) {
-    alert(`${String(error)}`)
-  }
-  finally {
-    isLoading.value = false
-  }
-}
 
 watch(visibility, async (val) => {
   try {
@@ -99,7 +48,7 @@ watch(visibility, async (val) => {
       </div>
       <div flex gap-2>
         <AInput v-model="redirectCode" placeholder="粘贴链接地址" class="text-xs" />
-        <ABtn :disabled="isLoading" variant="light" text-sm @click="handleSubmit">
+        <ABtn :disabled="isLoading || !redirectCode" variant="light" text-sm @click="getSessionToken(redirectCode)">
           <ALoadingIcon
             icon="i-mingcute:switch-line"
             :loading="isLoading"

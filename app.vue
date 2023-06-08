@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { appName } from '~/constants'
-
 useHead({
-  title: appName,
+  title: 'Switch Card',
 })
 </script>
 
 <template>
+  <ClientOnly>
+    <Toaster rich-colors position="top-center" />
+  </ClientOnly>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
