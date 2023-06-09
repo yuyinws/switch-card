@@ -30,6 +30,7 @@ export const useInfoStore = defineStore('info', () => {
         throw new Error('获取用户信息错误')
 
       userInfo.value = data.value?.data || null
+      saveUser()
     }
     catch (error) {
       $toast.error(String(error))
@@ -60,6 +61,35 @@ export const useInfoStore = defineStore('info', () => {
     }
     finally {
       loading.value = false
+    }
+  }
+
+  async function saveUser() {
+    const { $toast } = useNuxtApp()
+    try {
+      if (userInfo.value) {
+        const { id, nickname } = userInfo.value!
+        const { auth } = useAuthStore()
+        const { sessionToken } = auth
+
+        const { data } = useFetch('/db/user', {
+          method: 'POST',
+          body: {
+            userId: id,
+            sessionToken,
+            nickname,
+          },
+        })
+
+        if (data.value?.state === 'fail')
+          throw new Error('更新用户信息失败')
+      }
+      else {
+        throw new Error('用户信息为空')
+      }
+    }
+    catch (error) {
+      $toast.error(String(error))
     }
   }
 

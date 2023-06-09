@@ -44,7 +44,7 @@ function formatMin(min: number): string {
 </script>
 
 <template>
-  <ACard v-if="userInfo" p-5>
+  <ACard v-if="userInfo" m-auto max-w-2xl p-5>
     <div flex="~ wrap" items-center justify-between gap-4>
       <div flex items-center gap-3>
         <AAvatar text-lg src="/avatar.jpeg" />
@@ -68,7 +68,7 @@ function formatMin(min: number): string {
       :tabs="tabs"
     >
       <template #recent>
-        <div flex="~ wrap" gap-2 mt="2">
+        <div flex="~ col" gap-2 mt="2">
           <div v-for="(item) in formatRecentPlays" :key="item.playedDate">
             <div mb-2 flex items-center gap-2>
               <div h-2 w-2 bg="primary" class="b-rd-50%" />
@@ -76,12 +76,9 @@ function formatMin(min: number): string {
                 {{ dayjs(item.playedDate).fromNow() }}
               </div>
             </div>
-            <div flex="~ col" ml-3 gap-4>
+            <div flex="~ wrap" ml-3 gap-4>
               <div v-for="game in item.dailyPlayHistories" :key="game.titleId">
                 <nuxt-img b-rd-2 width="100" height="100" :src="game.imageUrl" />
-                <div w-24 text="truncate sm" font-bold>
-                  {{ game.titleName }}
-                </div>
                 <div>
                   {{ formatMin(game.totalPlayedMinutes) }}
                 </div>
@@ -92,14 +89,11 @@ function formatMin(min: number): string {
       </template>
 
       <template #history>
-        <div flex="~ col" mt-4 gap-4>
+        <div flex="~ wrap" mt-4 justify-between gap-4>
           <div v-for="game in playHistories?.playHistories" :key="game.titleId">
             <div flex gap-4>
-              <NuxtImg b-rd-2 width="150" height="150" :src="game.imageUrl" />
-              <div h-150px flex="~ col" justify-between>
-                <div font-bold text="truncate lg">
-                  《{{ game.titleName }}》
-                </div>
+              <NuxtImg b-rd-2 width="130" height="130" :src="game.imageUrl" />
+              <div h-130px flex="~ col" justify-between>
                 <div>
                   游玩时间: {{ formatMin(game.totalPlayedMinutes) }}
                 </div>

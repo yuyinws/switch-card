@@ -19,8 +19,4 @@ html, body , #__nuxt{
   margin: 0;
   padding: 0;
 }
-
-html.dark {
-  color: white;
-}
 </style>
