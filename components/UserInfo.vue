@@ -68,7 +68,7 @@ const imgUrl = computed(() => {
 const referenceList = computed(() => {
   return [
     {
-      text: `![switch-card]${imgUrl.value}`,
+      text: `![switch-card](${imgUrl.value})`,
       type: 'Markdown',
     },
     {
