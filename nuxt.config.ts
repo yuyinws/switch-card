@@ -1,6 +1,9 @@
 import turboConsole from 'vite-plugin-turbo-console'
 
 export default defineNuxtConfig({
+  devServer: {
+    port: 5876,
+  },
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',

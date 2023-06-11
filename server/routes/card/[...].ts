@@ -7,6 +7,7 @@ import { renderCard } from '~/server/core/renderCard'
 export default defineEventHandler(async (event) => {
   try {
     setHeader(event, 'Content-Type', 'image/svg+xml')
+    setHeader(event, 'Cache-Control', 'public, max-age=86400')
     const { _: params } = event.context.params as { _: string }
 
     const splits = params.split('/')
