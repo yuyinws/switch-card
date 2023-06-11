@@ -3,10 +3,10 @@ const { auth } = useAuthStore()
 </script>
 
 <template>
-  <template v-if="!auth.accessToken">
+  <div v-if="!auth.accessToken">
     <Login />
-  </template>
-  <template v-else>
+  </div>
+  <div v-else>
     <UserInfo />
-  </template>
+  </div>
 </template>
