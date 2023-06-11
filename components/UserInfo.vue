@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import zh from 'dayjs/locale/zh-cn'
+import { formatMin } from '~/utils/tools'
 
 const dayjs = useDayjs()
 dayjs.locale(zh)
@@ -37,17 +38,13 @@ const formatRecentPlays = computed(() => {
 function refreshGameData() {
   withRefreshAccessToken(getPlayHistory)
 }
-
-function formatMin(min: number): string {
-  return min < 60 ? `${min}min` : `${Math.floor(min / 60)}h`
-}
 </script>
 
 <template>
   <ACard v-if="userInfo" m-auto max-w-2xl p-5>
     <div flex="~ wrap" items-center justify-between gap-4>
       <div flex items-center gap-3>
-        <AAvatar text-lg src="/avatar.jpeg" />
+        <AAvatar text-lg src="/avatar/01.jpg" class="rounded-2xl" />
         <div text="xl" font-bold>
           {{ userInfo?.nickname }}
         </div>
@@ -114,6 +111,7 @@ function formatMin(min: number): string {
 
       <template #card>
         开发中...
+        <nuxt-img src="http://localhost:3000/card/ae1832d82bb46a63" />
       </template>
     </ATabs>
   </ACard>

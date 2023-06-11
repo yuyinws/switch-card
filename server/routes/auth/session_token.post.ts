@@ -1,6 +1,5 @@
-import type { SessionTokenRes } from '~/types/nintendo'
+import type { Response, SessionTokenRes } from '~/types'
 import { CLIENT_ID } from '~/utils/constance'
-import type { Response } from '~/types/basic'
 
 export default defineEventHandler(async (event): Promise<Response<SessionTokenRes>> => {
   try {

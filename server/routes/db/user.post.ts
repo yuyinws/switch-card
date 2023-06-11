@@ -1,6 +1,5 @@
 import { createKysely } from '@vercel/postgres-kysely'
-import type { Database } from '~/types/database'
-import type { Response } from '~/types/basic'
+import type { Database, Response } from '~/types'
 
 export default defineEventHandler(async (event): Promise<Response<null>> => {
   try {

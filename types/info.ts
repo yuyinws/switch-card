@@ -4,7 +4,7 @@ export interface UserInfo {
   country: string
 }
 
-interface History {
+export interface History {
   titleName: string
   imageUrl: string
   titleId: string
@@ -22,3 +22,12 @@ export interface PlayHistories {
     dailyPlayHistories: History[]
   }[]
 }
+
+export type FormatedRecentData = Record<string, {
+  name: string
+  image: string
+  playedMin: number
+  playedTimeString?: string
+  totalMin?: number
+  totalMinString?: string
+}>

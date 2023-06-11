@@ -3,3 +3,8 @@ export interface Response<T> {
   message?: string
   data: T | null
 }
+
+export interface Config {
+  mode: 'recent' | 'history'
+  avatar: string
+}

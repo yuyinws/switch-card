@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "postinstall": "nuxi prepare",
     "generate": "nuxi generate",
-    "start:generate": "npx serve .output/public"
+    "start:generate": "npx serve .output/public",
+    "test": "vitest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.0",
@@ -35,6 +36,7 @@
     "eslint": "^8.41.0",
     "kysely": "^0.25.0",
     "nuxt": "^3.5.3",
+    "nuxt-vitest": "^0.8.5",
     "pinia": "^2.1.3",
     "typescript": "^5.0.4",
     "ufo": "^1.1.2",

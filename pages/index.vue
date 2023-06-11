@@ -4,7 +4,7 @@ const { auth } = useAuthStore()
 
 <template>
   <template v-if="!auth.accessToken">
-    <Login v-if="!auth.accessToken" />
+    <Login />
   </template>
   <template v-else>
     <UserInfo />

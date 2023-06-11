@@ -1,5 +1,4 @@
-import type { AccessTokenRes } from '~/types/nintendo'
-import type { Response } from '~/types/basic'
+import type { AccessTokenRes, Response } from '~/types'
 import { CLIENT_ID, GRANT_TYPE } from '~/utils/constance'
 
 export default defineEventHandler(async (event): Promise<Response<AccessTokenRes>> => {

@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxt/image',
     'dayjs-nuxt',
+    'nuxt-vitest',
   ],
   ssr: false,
   experimental: {
