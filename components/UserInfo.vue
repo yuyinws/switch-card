@@ -53,11 +53,16 @@ const config: Config = reactive({
 })
 
 const imgUrl = computed(() => {
+  const url = `${window.location.origin}/card/${userInfo.value?.id}`
   const configArr = []
   if (config.mode === 'history')
     configArr.push('history')
 
-  return `${window.location.origin}/card/${userInfo.value?.id}/${configArr.join(',')}`
+  let configs = configArr.join(',')
+  if (configs)
+    configs = `/${configs}`
+
+  return `${url + configs}`
 })
 
 const referenceList = computed(() => {
@@ -190,11 +195,11 @@ async function handleCopy(text: string) {
           </div>
         </div>
         <div flex="~ col" gap-3>
-          <div v-for="(item, index) in referenceList" :key="index" bg="gray-100" relative cursor-pointer rounded-xl p-4 @click="handleCopy(item.text)">
+          <div v-for="(item, index) in referenceList" :key="index" bg="gray-200" dark="bg-gray-800" relative cursor-pointer rounded-xl p-4 opacity-50 @click="handleCopy(item.text)">
             <div absolute right-2 top-2 text-sm>
               {{ item.type }}
             </div>
-            <div text-gray-800>
+            <div text-gray-800 dark="text-gray-100">
               {{ item.text }}
             </div>
           </div>
