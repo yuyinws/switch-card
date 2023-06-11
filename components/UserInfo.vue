@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import zh from 'dayjs/locale/zh-cn'
 import { formatMin } from '~/utils/tools'
+import type { Config } from '~/types'
 
 const dayjs = useDayjs()
 dayjs.locale(zh)
@@ -23,6 +24,7 @@ const tabs = [
 const { getUserInfo, withRefreshAccessToken, getPlayHistory } = useInfoStore()
 const { userInfo, playHistories, loading } = storeToRefs(useInfoStore())
 const { logout } = useAuthStore()
+
 onMounted(() => {
   if (!userInfo.value)
     withRefreshAccessToken(getUserInfo)
@@ -37,6 +39,53 @@ const formatRecentPlays = computed(() => {
 
 function refreshGameData() {
   withRefreshAccessToken(getPlayHistory)
+}
+
+const isImgLoad = ref(false)
+
+function onImgLoad() {
+  isImgLoad.value = true
+}
+
+const config: Config = reactive({
+  mode: 'recent',
+  avatar: '01',
+})
+
+const imgUrl = computed(() => {
+  const configArr = []
+  if (config.mode === 'history')
+    configArr.push('history')
+
+  return `${window.location.origin}/card/${userInfo.value?.id}/${configArr.join(',')}`
+})
+
+const referenceList = computed(() => {
+  return [
+    {
+      text: `![switch-card]${imgUrl.value}`,
+      type: 'Markdown',
+    },
+    {
+      text: `[img]${imgUrl.value}[/img]`,
+      type: 'BBCode',
+    },
+    {
+      text: `<img width="460" height="182" src="${imgUrl.value}" />`,
+      type: 'HTML',
+    },
+  ]
+})
+
+async function handleCopy(text: string) {
+  const { $toast } = useNuxtApp()
+  try {
+    await navigator.clipboard.writeText(text)
+    $toast.success('复制成功')
+  }
+  catch (error) {
+    $toast.error('复制失败')
+  }
 }
 </script>
 
@@ -110,8 +159,46 @@ function refreshGameData() {
       </template>
 
       <template #card>
-        开发中...
-        <nuxt-img src="http://localhost:3000/card/ae1832d82bb46a63" />
+        <div flex="~ col" items-center gap-4 py-4>
+          <img v-show="isImgLoad" width="460" height="182" :src="imgUrl" @load="onImgLoad">
+          <ACard
+            v-show="!isImgLoad" variant="fill"
+            color="primary"
+            h-182px w-460px b-rd-3 shadow-none
+          >
+            <ALoader :show="true" />
+          </ACard>
+        </div>
+        <div mb-3 flex gap-3>
+          <div>显示内容:</div>
+          <div flex gap-5>
+            <ARadio
+              v-model="config.mode"
+              value="recent"
+              label="最近游玩"
+              name="mode"
+              @update="isImgLoad = false"
+            />
+
+            <ARadio
+              v-model="config.mode"
+              value="history"
+              label="历史记录"
+              name="mode"
+              @update:modelValue="isImgLoad = false"
+            />
+          </div>
+        </div>
+        <div flex="~ col" gap-3>
+          <div v-for="(item, index) in referenceList" :key="index" bg="gray-100" relative cursor-pointer rounded-xl p-4 @click="handleCopy(item.text)">
+            <div absolute right-2 top-2 text-sm>
+              {{ item.type }}
+            </div>
+            <div text-gray-800>
+              {{ item.text }}
+            </div>
+          </div>
+        </div>
       </template>
     </ATabs>
   </ACard>
