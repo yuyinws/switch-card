@@ -177,7 +177,7 @@ async function handleCopy(text: string) {
               value="recent"
               label="最近游玩"
               name="mode"
-              @update="isImgLoad = false"
+              @update:model-value="isImgLoad = false"
             />
 
             <ARadio
@@ -185,7 +185,7 @@ async function handleCopy(text: string) {
               value="history"
               label="历史记录"
               name="mode"
-              @update:modelValue="isImgLoad = false"
+              @update:model-value="isImgLoad = false"
             />
           </div>
         </div>
