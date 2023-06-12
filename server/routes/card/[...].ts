@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     if (!findUser)
       throw new Error('找不到用户信息')
 
-    const { session_token } = findUser
+    const { session_token, nickname } = findUser
     const { access_token } = await $fetch<AccessTokenRes>('https://accounts.nintendo.com/connect/1.0.0/api/token', {
       method: 'post',
       body: {
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
     //   playData,
     // }
 
-    const { render } = renderCard(playData, getConfig(configs))
+    const { render } = renderCard(playData, getConfig(configs), nickname)
     return await render()
   }
   catch (error) {

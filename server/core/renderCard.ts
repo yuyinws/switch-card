@@ -3,7 +3,7 @@ import { formatRecentGames, imageUrl2Base64 } from '~/server/utils'
 import { JPEG_PREFIX, NS_LOGO_BASE64 } from '~/utils/constance'
 import { formatMin } from '~/utils/tools'
 
-export function renderCard(playData: PlayHistories, config: Config) {
+export function renderCard(playData: PlayHistories, config: Config, nickname: string) {
   let gameDataString = ''
   let avatarString = ''
   let totalTime = ''
@@ -117,7 +117,7 @@ export function renderCard(playData: PlayHistories, config: Config) {
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div style="display:flex;align-items:center;gap:10px">
               <img height="30" width="30" class="avatar" src="${JPEG_PREFIX + avatarString}" />
-              <div class="name">yuyin</div>
+              <div class="name">${nickname}</div>
             </div>
             <img height="20" width="20" src="${NS_LOGO_BASE64}" />
           </div>
