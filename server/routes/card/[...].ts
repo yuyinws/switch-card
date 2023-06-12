@@ -4,10 +4,12 @@ import type { AccessTokenRes, Database, PlayHistories } from '~/types'
 import { CLIENT_ID, GRANT_TYPE, UA } from '~/utils/constance'
 import { renderCard } from '~/server/core/renderCard'
 
+const IS_DEV = process.env.NODE_ENV === 'development'
+
 export default defineEventHandler(async (event) => {
   try {
     setHeader(event, 'Content-Type', 'image/svg+xml')
-    setHeader(event, 'Cache-Control', 'public, max-age=86400')
+    setHeader(event, 'Cache-Control', `public, max-age=${IS_DEV ? '0' : '86400'}`)
     const { _: params } = event.context.params as { _: string }
 
     const splits = params.split('/')

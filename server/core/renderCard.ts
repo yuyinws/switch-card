@@ -11,7 +11,7 @@ export function renderCard(playData: PlayHistories, config: Config, nickname: st
     try {
       const { formatedRecentData, totalMinString } = await formatRecentGames(playData)
 
-      const games = Object.entries(formatedRecentData)
+      const games = Object.entries(formatedRecentData).slice(0, 5)
       for (const [_key, value] of games) {
         gameDataString += `
       <div class="game-group">
@@ -31,7 +31,7 @@ export function renderCard(playData: PlayHistories, config: Config, nickname: st
   async function formatHistoryGames() {
     let games = playData.playHistories
     games = games.sort((a, b) => b.totalPlayedMinutes - a.totalPlayedMinutes,
-    )
+    ).slice(0, 5)
     let totalMin = 0
     for (const game of games) {
       const imgBase64 = await imageUrl2Base64(game.imageUrl)
