@@ -1,4 +1,5 @@
 import turboConsole from 'vite-plugin-turbo-console'
+import { pwa } from './config/pwa'
 
 export default defineNuxtConfig({
   devServer: {
@@ -14,6 +15,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'dayjs-nuxt',
     'nuxt-vitest',
+    '@vite-pwa/nuxt',
   ],
   ssr: false,
   experimental: {
@@ -84,6 +86,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [turboConsole()],
   },
+  pwa,
 
   build: {
     transpile: ['vue-sonner'],

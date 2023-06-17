@@ -4,6 +4,7 @@
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
+    "dev:pwa": "VITE_PLUGIN_PWA=true nuxi dev",
     "start": "node .output/server/index.mjs",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
@@ -31,6 +32,7 @@
     "@unocss/nuxt": "^0.53.1",
     "@vercel/postgres": "^0.3.0",
     "@vercel/postgres-kysely": "^0.3.0",
+    "@vite-pwa/nuxt": "^0.1.0",
     "@vueuse/nuxt": "^10.2.0",
     "base64url": "^3.0.1",
     "dayjs-nuxt": "^1.1.2",
