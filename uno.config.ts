@@ -12,7 +12,11 @@ import { presetAnu } from 'anu-vue'
 import { presetThemeDefault } from '@anu-vue/preset-theme-default'
 
 export default defineConfig({
-  include: [/.*\/anu-vue\.js(.*)?$/, './**/*.vue', './**/*.md'],
+  content: {
+    pipeline: {
+      include: [/.*\/anu-vue\.js(.*)?$/, './**/*.vue', './**/*.md'],
+    },
+  },
   presets: [
     presetUno(),
     presetAttributify(),
