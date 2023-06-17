@@ -12,9 +12,11 @@
     "start:generate": "npx serve .output/public",
     "test": "vitest"
   },
+  "dependencies": {
+    "@anu-vue/nuxt": "^0.15.1"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.0",
-    "@anu-vue/nuxt": "^0.14.0",
     "@iconify-json/carbon": "^1.1.16",
     "@iconify-json/mdi": "^1.1.52",
     "@iconify-json/mingcute": "^1.1.6",
@@ -30,7 +32,6 @@
     "@vercel/postgres": "^0.3.0",
     "@vercel/postgres-kysely": "^0.3.0",
     "@vueuse/nuxt": "^10.1.2",
-    "anu-vue": "^0.14.0",
     "base64url": "^3.0.1",
     "dayjs-nuxt": "^1.1.2",
     "eslint": "^8.41.0",

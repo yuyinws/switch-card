@@ -92,6 +92,62 @@ async function handleCopy(text: string) {
     $toast.error('复制失败')
   }
 }
+
+const orderOptions = ['游玩时间', '游玩天数', '上次游玩', '首次游玩']
+
+type Order = '游玩时间' | '游玩天数' | '上次游玩' | '首次游玩'
+
+const orderWay = ref<Order>('游玩时间')
+
+const sortWay = ref('descending')
+
+function handlesortWayClick() {
+  sortWay.value = sortWay.value === 'descending' ? 'ascending' : 'descending'
+  sortGames()
+}
+
+function sortGames() {
+  switch (orderWay.value) {
+    case '游玩时间': {
+      playHistories.value!.playHistories.sort((a, b) => {
+        if (sortWay.value === 'descending')
+          return b.totalPlayedMinutes - a.totalPlayedMinutes
+        else
+          return a.totalPlayedMinutes - b.totalPlayedMinutes
+      })
+      break
+    }
+    case '上次游玩': {
+      playHistories.value!.playHistories.sort((a, b) => {
+        if (sortWay.value === 'descending')
+          return dayjs(b.lastPlayedAt).valueOf() - dayjs(a.lastPlayedAt).valueOf()
+        else
+          return dayjs(a.lastPlayedAt).valueOf() - dayjs(b.lastPlayedAt).valueOf()
+      })
+      break
+    }
+
+    case '游玩天数': {
+      playHistories.value!.playHistories.sort((a, b) => {
+        if (sortWay.value === 'descending')
+          return b.totalPlayedDays! - a.totalPlayedDays!
+        else
+          return a.totalPlayedDays! - b.totalPlayedDays!
+      })
+      break
+    }
+
+    case '首次游玩': {
+      playHistories.value!.playHistories.sort((a, b) => {
+        if (sortWay.value === 'descending')
+          return dayjs(b.firstPlayedAt).valueOf() - dayjs(a.firstPlayedAt).valueOf()
+        else
+          return dayjs(a.firstPlayedAt).valueOf() - dayjs(b.firstPlayedAt).valueOf()
+      })
+      break
+    }
+  }
+}
 </script>
 
 <template>
@@ -140,6 +196,15 @@ async function handleCopy(text: string) {
       </template>
 
       <template #history>
+        <div mt-3 max-w-90 min-w-85 flex items-center>
+          <div w-22 flex-shrink-0>
+            排序方式：
+          </div>
+          <div mr-3 flex-1>
+            <ASelect v-model="orderWay" :options="orderOptions" @update:model-value="sortGames" />
+          </div>
+          <i :class="sortWay === 'descending' ? 'i-mdi:sort-descending' : 'i-mdi:sort-ascending'" w-4 flex-shrink-0 cursor-pointer font-bold text-primary @click="handlesortWayClick" />
+        </div>
         <div flex="~ wrap" mt-4 justify-between gap-4>
           <div v-for="game in playHistories?.playHistories" :key="game.titleId">
             <div flex gap-4>
@@ -195,11 +260,11 @@ async function handleCopy(text: string) {
           </div>
         </div>
         <div flex="~ col" gap-3>
-          <div v-for="(item, index) in referenceList" :key="index" bg="gray-200" dark="bg-gray-800" relative cursor-pointer rounded-xl p-4 opacity-50 @click="handleCopy(item.text)">
+          <div v-for="(item, index) in referenceList" :key="index" bg="gray-200" dark="bg-gray-800" relative cursor-pointer rounded-xl px-4 pb-4 pt-8 opacity-50 @click="handleCopy(item.text)">
             <div absolute right-2 top-2 text-sm>
               {{ item.type }}
             </div>
-            <div text-gray-800 dark="text-gray-100">
+            <div break-all text-gray-800 dark="text-gray-100">
               {{ item.text }}
             </div>
           </div>
