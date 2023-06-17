@@ -5,6 +5,7 @@ useHead({
 </script>
 
 <template>
+  <VitePwaManifest />
   <ClientOnly>
     <Toaster rich-colors position="top-center" />
   </ClientOnly>
