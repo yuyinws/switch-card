@@ -12,3 +12,10 @@
 - 资料卡片生成
 - 支持深色模式
 - 支持PWA
+
+## 📷 截图
+<p align="center">
+  <img height="400" src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/06/upgit_20230620_1687238840.png">
+  <img height="400" src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/06/upgit_20230620_1687238857.png">
+</p>
+
