@@ -28,7 +28,7 @@
 
 ## 风险提示&免责声明
 
-本系统中获取会话令牌的方法主要基于https://github.com/ZekeSnider/NintendoSwitchRESTAPI提供的源代码。无法保证它完全安全且没有任何风险。
+本系统中获取会话令牌的方法主要基于 https://github.com/ZekeSnider/NintendoSwitchRESTAPI 提供的源代码。无法保证它完全安全且没有任何风险。
 
 用户应该知道，使用任何第三方工具来获取会话标记可能违反任天堂的用户协议，账户可能会被终止或暂停。因此，用户应该自担风险使用此类工具，并了解潜在的后果。
 
