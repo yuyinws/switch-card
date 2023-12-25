@@ -5,7 +5,7 @@ import { UA } from '~/utils/constance'
 export default defineEventHandler(async (event): Promise<Response<PlayHistories>> => {
   const query = getQuery(event)
   try {
-    const data = await $fetch<PlayHistories>('https://mypage-api.entry.nintendo.co.jp/api/v1/users/me/play_histories', {
+    const data = await $fetch<PlayHistories>('https://news-api.entry.nintendo.co.jp/api/v1.1/users/me/play_histories', {
       headers: {
         'Authorization': `Bearer ${query.accessToken}`,
         'User-Agent': UA,
