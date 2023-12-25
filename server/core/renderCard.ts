@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import type { Config, PlayHistories } from '~/types'
 import { formatRecentGames, imageUrl2Base64 } from '~/server/utils'
 import { JPEG_PREFIX, NS_LOGO_BASE64 } from '~/utils/constance'
@@ -49,7 +50,7 @@ export function renderCard(playData: PlayHistories, config: Config, nickname: st
 
   async function setAvatar() {
     try {
-      avatarString = await imageUrl2Base64(`${process.env.DOMAIN_ORIGIN}/avatar/${config.avatar}.jpg`)
+      avatarString = await imageUrl2Base64(`${env.DOMAIN_ORIGIN}/avatar/${config.avatar}.jpg`)
     }
     catch (error) {
       avatarString = ''

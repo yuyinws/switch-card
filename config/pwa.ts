@@ -1,3 +1,4 @@
+import { env } from 'node:process'
 import type { ModuleOptions } from '@vite-pwa/nuxt'
 
 const scope = '/'
@@ -71,7 +72,7 @@ export const pwa: ModuleOptions = {
   registerWebManifestInRouteRules: true,
   writePlugin: true,
   devOptions: {
-    enabled: process.env.VITE_PLUGIN_PWA === 'true',
+    enabled: env.VITE_PLUGIN_PWA === 'true',
     navigateFallback: scope,
   },
 }

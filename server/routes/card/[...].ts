@@ -1,10 +1,11 @@
+import { env } from 'node:process'
 import { createKysely } from '@vercel/postgres-kysely'
 import { getConfig } from '~/server/core/getConfig'
 import type { AccessTokenRes, Database, PlayHistories } from '~/types'
 import { CLIENT_ID, GRANT_TYPE, UA } from '~/utils/constance'
 import { renderCard } from '~/server/core/renderCard'
 
-const IS_DEV = process.env.NODE_ENV === 'development'
+const IS_DEV = env.NODE_ENV === 'development'
 
 export default defineEventHandler(async (event) => {
   try {

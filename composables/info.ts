@@ -107,8 +107,6 @@ export const useInfoStore = defineStore('info', () => {
     loading,
     resetData,
   }
-},
-{
+}, {
   persist: true,
-},
-)
+})
