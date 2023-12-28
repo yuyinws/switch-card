@@ -7,15 +7,15 @@ export default defineNuxtConfig({
   },
   modules: [
     '@vueuse/nuxt',
-    '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    '@anu-vue/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@nuxt/image',
     'dayjs-nuxt',
     '@nuxt/test-utils/module',
     '@vite-pwa/nuxt',
+    '@nuxtjs/tailwindcss',
+    'shadcn-nuxt',
   ],
   ssr: false,
   experimental: {
@@ -60,20 +60,24 @@ export default defineNuxtConfig({
     },
   },
 
-  anu: {
-    themes: {
-      light: {
-        colors: {
-          primary: '2, 69%, 49%',
-        },
-      },
-      dark: {
-        colors: {
-          primary: '2, 69%, 49%',
-        },
-      },
-    },
+  // anu: {
+  //   themes: {
+  //     light: {
+  //       colors: {
+  //         primary: '2, 69%, 49%',
+  //       },
+  //     },
+  //     dark: {
+  //       colors: {
+  //         primary: '2, 69%, 49%',
+  //       },
+  //     },
+  //   },
 
+  // },
+  shadcn: {
+    prefix: 'S',
+    componentDir: './components/ui',
   },
 
   piniaPersistedstate: {
