@@ -15,9 +15,6 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@anu-vue/nuxt": "^0.15.2",
-    "@radix-icons/vue": "^1.0.0",
-    "@vueuse/core": "^10.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "radix-vue": "^1.3.2",
