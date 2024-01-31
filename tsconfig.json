@@ -1,6 +1,6 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "types": ["anu-vue/volar"]
+    "types": ["unplugin-icons/types/vue"]
   }
 }

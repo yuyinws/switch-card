@@ -1,4 +1,3 @@
-import turboConsole from 'vite-plugin-turbo-console'
 import { pwa } from './config/pwa'
 
 export default defineNuxtConfig({
@@ -16,6 +15,10 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
+    'unplugin-turbo-console/nuxt',
+    ['unplugin-icons/nuxt', {
+      autoInstall: true,
+    }],
   ],
   ssr: false,
   experimental: {
@@ -25,10 +28,6 @@ export default defineNuxtConfig({
     inlineSSRStyles: false,
     renderJsonPayloads: true,
   },
-
-  css: [
-    '@unocss/reset/tailwind.css',
-  ],
 
   colorMode: {
     classSuffix: '',
@@ -86,10 +85,6 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
-  },
-
-  vite: {
-    plugins: [turboConsole()],
   },
   pwa,
 

@@ -39,7 +39,7 @@ watch(visibility, async (val) => {
         </div>
         <div flex items-center justify-center>
           <div>
-            2.在Nintendo账号页面右击
+            2.在Nintendo账号页面鼠标右键点击
             <span font-bold color="primary">「选择此人」</span>
             按钮并复制链接地址.
           </div>

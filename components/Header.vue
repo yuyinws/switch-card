@@ -1,11 +1,13 @@
 <script setup lang="ts">
-
+import RadixIconsGithubLogo from '~icons/radix-icons/github-logo'
 </script>
 
 <template>
-  <header class="header" sticky top-0 z-100 w-full p-10px>
-    <div flex items-center justify-between>
-      <a i-carbon-logo-github href="https://github.com/yuyinws/switch-card" target="_blank" />
+  <header class="sticky py-3 xl:px-20 px-3 z-40 top-0 bg-background/80 backdrop-blur-lg border-b border-border">
+    <div class="flex items-center justify-between">
+      <NuxtLink to="https://github.com/yuyinws/switch-card" target="_blank">
+        <RadixIconsGithubLogo class="text-gray-500" />
+      </NuxtLink>
       <div class="title">
         Switch Card
       </div>

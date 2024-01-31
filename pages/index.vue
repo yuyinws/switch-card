@@ -1,12 +1,15 @@
 <script setup lang="ts">
-const { auth } = useAuthStore()
+definePageMeta({
+  middleware: ['auth'],
+})
 </script>
 
 <template>
-  <div v-if="!auth.accessToken">
+  123
+  <!-- <div v-if="!auth.accessToken">
     <Login />
   </div>
   <div v-else>
     <UserInfo />
-  </div>
+  </div> -->
 </template>
